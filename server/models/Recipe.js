@@ -20,8 +20,8 @@ const Schema = mongoose.Schema;
 
 const Recipe = new Schema({
     name:         {type: String},
-    description:  {type: String}
-    //steps:      {[type: String]}
+    description:  {type: String},
+    steps:        {type: [String]}
 });
 
 const RecipeModel = mongoose.model("RecipeModel", Recipe);

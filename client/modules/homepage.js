@@ -1,4 +1,5 @@
-import {deleteRecipe} from "./delete.js";
+import { deleteRecipe } from "./delete.js";
+import { retrieveRecipe } from "./retrieve.js";
 
 async function homepage() {
     const url = "http://127.0.0.1:3000/recipe";
@@ -9,16 +10,17 @@ async function homepage() {
     document.getElementById("homepage-response").innerHTML = "";
 
     jsonResponse.forEach(recipe => {
-        let count = 1;
-        let name = `<h4>`;
-        let desc = `<p>`;
-        let _id = `<p>`;
-        name += `${recipe.name}</h4>`; 
-        desc += `${recipe.description}</p>`;
-        _id += `${recipe._id}</p>`;
+        let name = `<h4 class="recNames">${recipe.name}</h4>`;
+        let desc = `<p>${recipe.description}</p>`;
+        let recipe_steps = recipe.steps;
+        let steps = `<ol>`;
+        recipe_steps.forEach((step) => {
+            steps += `<li>${step}</li>`;
+        });
+        steps += `</ol>`;
+    
         document.getElementById("homepage-response").innerHTML += 
-        `<div class="recipe-cards" recipeId=${count}>${name}<span class="delBtn">&times;</span><br><span id="recId">${_id}</span><br>${desc}</div>`;
-        count++;
+        `<div class="recipe-cards">${name}<span class="delBtn">&times;</span><br>${desc}${steps}</div>`;
     });
 
     // delete recipe, put this here (as opposed to index.js) in order for event listeners to attach at appropriate time
@@ -32,6 +34,18 @@ async function homepage() {
     } else {
         console.error(`Unable to bind to target! Debug Required.`);
     }
+
+    const recipeCards = document.getElementsByClassName("recNames");
+    if (recipeCards) {
+        for (let i=0; i<recipeCards.length; i++) {
+            recipeCards[i].addEventListener("click", () => {
+                retrieveRecipe(i);
+            });
+        }
+    } else {
+        console.error(`Unable to bind to target! Debug Required.`);
+    }
+
 }
 
 export { homepage };

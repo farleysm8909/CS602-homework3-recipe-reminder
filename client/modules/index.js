@@ -37,5 +37,23 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     } else {
         console.error(`Unable to bind to target! Debug Required.`);
-    }  
+    } 
+    
+    // update step btn
+    const updateBtn = document.getElementById("updateStep");
+    updateBtn.addEventListener("click", () => {
+        // update step
+    });
+
+
+    // cancel update step btn
+    const cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
+    cancelUpdateBtn.addEventListener("click", () => {
+        document.getElementById("createBtn").style.display = "inline";
+        document.getElementById("updateStep").style.display = "none";
+        document.getElementById("cancelUpdateBtn").style.display = "none";
+        
+        homepage();
+    });
+
 });

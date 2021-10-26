@@ -5,8 +5,8 @@ async function saveRecipe() {
 
     const data = {
         name:           document.querySelector("#name").value,
-        description:    document.querySelector("#description").value
-        //steps:          document.querySelector("#steps").value
+        description:    document.querySelector("#description").value,
+        steps:          document.querySelector("#steps").value
     };
     
     const config = {

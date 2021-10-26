@@ -17,6 +17,31 @@ router.get("/", async (req, res) => {
 });
 
 
+// get recipe by id
+router.get("/:_id", async (req, res) => { 
+    try {
+        const recipe = await Recipe.findOne({_id: req.params._id}); // https://rahmanfadhil.com/express-rest-api/
+        res.send(recipe);
+    } catch(err) {
+        res.status(404).send({error: "Recipe not found!"});
+    }
+});
+
+
+// get recipe step by id
+router.get("/:_id/step/:sId", async (req, res) => { 
+    try {
+        const recipe = await Recipe.findOne({_id: req.params._id}); // https://rahmanfadhil.com/express-rest-api/
+        const step = recipe.steps[req.params.sId-1]; // subtract one since users will type 1, 2... instead of 0, 1...
+        res.send(step);
+    } catch(err) {
+        res.status(404).send({error: "Recipe not found!"});
+    }
+});
+
+
+
+
 /* ************************* CREATE ************************* */
 
 
@@ -28,8 +53,8 @@ router.post("/", async (req, res) => {
     }
     const data = {
         name:           req.body.name,
-        description:    req.body.description
-        //steps:          req.body.steps
+        description:    req.body.description,
+        steps:          req.body.steps
     };
     
     const recipe = new Recipe(data);
