@@ -32,8 +32,12 @@ router.get("/:_id", async (req, res) => {
 router.get("/:_id/step/:sId", async (req, res) => { 
     try {
         const recipe = await Recipe.findOne({_id: req.params._id}); // https://rahmanfadhil.com/express-rest-api/
-        const step = recipe.steps[req.params.sId-1]; // subtract one since users will type 1, 2... instead of 0, 1...
-        res.send(step);
+        const sId = Number(req.params.sId);
+        const steps_string = recipe.steps[0];
+        // break up string into individual steps
+        const steps_array = steps_string.split("   ");
+        const step = steps_array[sId-1]; // subtract one since users will type 1, 2... instead of 0, 1...
+        res.status(200).json(JSON.stringify(step));
     } catch(err) {
         res.status(404).send({error: "Recipe not found!"});
     }
@@ -99,7 +103,6 @@ router.delete("/:_id", async (req, res) => {
     try {
         const deletedrecipe = await Recipe.deleteOne({_id: req.params._id}); // https://rahmanfadhil.com/express-rest-api/
 
-        console.log(`deleted! Number of docs deleted: ${deletedrecipe.deletedCount}`);
         res.status(204).json({message: "Hooray!"});
     } catch(err) {
         res.status(404).json({error: "Recipe doesn't exist!"});

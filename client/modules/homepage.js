@@ -9,6 +9,7 @@ async function homepage() {
 
     document.getElementById("homepage-response").innerHTML = "";
     document.getElementById("step-entry-fields").style.display = "none";
+    document.getElementById("step-num-entry-field").style.display = "none";
 
     jsonResponse.forEach(recipe => {
         let name = `<h4 class="recNames">${recipe.name}</h4>`;

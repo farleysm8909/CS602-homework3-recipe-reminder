@@ -40,7 +40,17 @@ async function saveRecipe() {
     document.getElementById("create-recipe").style.display = "none";
     homepage();
     document.getElementById("homepage").style.display = "block";
+
 }
+
+
+// function addStep(nextStepNum) {
+//     document.getElementById("more-steps").innerHTML += 
+//     `<div class="input-group mb-3">
+//         <span class="input-group-text">Step #${nextStepNum} Description</span>
+//         <input type="text" class="form-control step-values" id="steps" placeholder="e.g., Next...">
+//     </div>`;
+// }
 
 function addStep(nextStepNum) {
     document.getElementById("more-steps").innerHTML += 
@@ -50,16 +60,24 @@ function addStep(nextStepNum) {
     </div>`;
 }
 
+
+
 function addStepToExistingRecipe() {
-    const step_entry_fields = document.getElementById("step-entry-fields");
+    let step_entry_fields = document.getElementById("step-entry-fields");
     step_entry_fields.innerHTML = 
     `<div class="input-group mb-3">
         <span class="input-group-text">New Step Description</span>
         <input type="text" class="form-control step-values" id="newsteps" placeholder="e.g., Next...">
     </div>`;
     step_entry_fields.style.display = "block";
+    document.getElementById("getStepBtn").style.display = "none";
+    document.getElementById("editStep").style.display = "none";
+    document.getElementById("findStepBtn").style.display = "none";
     document.getElementById("saveStepBtn").style.display = "inline";
 }
+
+
+
 
 async function saveStep() {
     const url = `http://127.0.0.1:3000/recipe`;

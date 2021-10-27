@@ -1,5 +1,6 @@
-import { saveRecipe, addStep, addStepToExistingRecipe, saveStep } from "./create.js";
+import { saveRecipe, addStepToExistingRecipe, saveStep, addStep } from "./create.js";
 import { homepage } from "./homepage.js";
+import { displayStepNumField, retrieveStep } from "./retrieve.js";
 // import { editStep } from "./update.js";
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -50,8 +51,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // create new step btn (while examining one recipe)
-    const addStep = document.getElementById("addStep");
-    addStep.addEventListener("click", () => {
+    const addOneStepBtn = document.getElementById("addStep");
+    addOneStepBtn.addEventListener("click", () => {
         addStepToExistingRecipe();
     });
 
@@ -71,6 +72,19 @@ window.addEventListener('DOMContentLoaded', () => {
         //editStep();
     });
 
+    // find step btn - updates UI to prepare for db retrieval
+    const findStepBtn = document.getElementById("findStepBtn");
+    findStepBtn.addEventListener("click", () => {
+        displayStepNumField();
+    });
+
+
+    // get step btn - initiates retrieval from db
+    const getStepBtn = document.getElementById("getStepBtn");
+    getStepBtn.addEventListener("click", () => {
+        retrieveStep();
+    });
+
 
     // cancel update step btn
     const cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
@@ -79,6 +93,8 @@ window.addEventListener('DOMContentLoaded', () => {
         document.getElementById("addStep").style.display = "none";
         document.getElementById("editStep").style.display = "none";
         document.getElementById("saveStepBtn").style.display = "none";
+        document.getElementById("getStepBtn").style.display = "none";
+        document.getElementById("findStepBtn").style.display = "none";
         document.getElementById("cancelUpdateBtn").style.display = "none";
 
         homepage();

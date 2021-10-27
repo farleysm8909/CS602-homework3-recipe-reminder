@@ -60,7 +60,7 @@ section > section {
     cursor: pointer;
 }
 
-#editStep, #addStep, #cancelUpdateBtn, #step-entry-fields, #saveStepBtn {
+#editStep, #addStep, #cancelUpdateBtn, #step-entry-fields, #saveStepBtn, #getStepBtn, #step-num-entry-field, #findStepBtn {
     display: none;
 }
 
