@@ -29,6 +29,7 @@ async function retrieveRecipe(recIndex) {
     `<div class="recipe-cards"><h4 id="retrieved-recipe">${name}</h4>${desc}${steps}</div>`;
 
     document.getElementById("createBtn").style.display = "none";
+    document.getElementById("saveEditBtn").style.display = "none";
     document.getElementById("addStep").style.display = "inline";
     document.getElementById("editStep").style.display = "inline";
     document.getElementById("findStepBtn").style.display = "inline";
@@ -54,7 +55,6 @@ function displayStepNumField() {
 
 
 
-// error somewhere in here... json not being converted properly
 async function retrieveStep() {
     const url = `http://127.0.0.1:3000/recipe`;
     const fetchResponse = await fetch(url);

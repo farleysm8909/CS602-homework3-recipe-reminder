@@ -10,6 +10,14 @@ async function homepage() {
     document.getElementById("homepage-response").innerHTML = "";
     document.getElementById("step-entry-fields").style.display = "none";
     document.getElementById("step-num-entry-field").style.display = "none";
+    document.getElementById("createBtn").style.display = "inline";
+    document.getElementById("addStep").style.display = "none";
+    document.getElementById("editStep").style.display = "none";
+    document.getElementById("saveStepBtn").style.display = "none";
+    document.getElementById("getStepBtn").style.display = "none";
+    document.getElementById("findStepBtn").style.display = "none";
+    document.getElementById("cancelUpdateBtn").style.display = "none";
+    document.getElementById("saveEditBtn").style.display = "none";
 
     jsonResponse.forEach(recipe => {
         let name = `<h4 class="recNames">${recipe.name}</h4>`;

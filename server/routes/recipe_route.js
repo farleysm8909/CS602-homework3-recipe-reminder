@@ -74,7 +74,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-// create a new recipe step NOT FINISHED
+// create a new recipe step
 router.post("/:_id/step", async (req, res) => { 
     // validate request
     if (!req.body.steps) {
@@ -110,3 +110,35 @@ router.delete("/:_id", async (req, res) => {
 });
 
 export {router as recipeRoutes};
+
+
+/* ************************* UPDATE ************************* */
+
+// update step with step id
+router.put("/:_id/step/:sId", async (req, res) => {
+    // validate request
+    if (!req.body.updatedStep) {
+        return res.status(400).send({error: "Step field cannot be empty"});
+    }
+
+    try {
+        let recipe = await Recipe.findById(req.params._id);
+        const sId = Number(req.params.sId);
+        let steps_string = recipe.steps[0];
+        // break up string into individual steps
+        const steps_array = steps_string.split("   ");
+        steps_array[sId-1] = req.body.updatedStep; // subtract one since users will type 1, 2... instead of 0, 1...
+        steps_string = "";
+        for (let i=0; i<steps_array.length-1; i++) {
+            steps_string += steps_array[i] + "   ";
+        }
+        steps_string += steps_array[steps_array.length-1];
+
+        recipe.steps = [steps_string];
+        const savedRecipe = await recipe.save();
+        res.status(200).json(JSON.stringify(savedRecipe));
+
+    } catch(err) {
+        res.status(404).json({error: "Unable to update step"});
+    }
+});

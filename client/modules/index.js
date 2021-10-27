@@ -1,7 +1,7 @@
 import { saveRecipe, addStepToExistingRecipe, saveStep, addStep } from "./create.js";
 import { homepage } from "./homepage.js";
 import { displayStepNumField, retrieveStep } from "./retrieve.js";
-// import { editStep } from "./update.js";
+import { editStep, displayEditStep } from "./update.js";
 
 window.addEventListener('DOMContentLoaded', () => {
     const create_page = document.getElementById("create-recipe");
@@ -66,10 +66,16 @@ window.addEventListener('DOMContentLoaded', () => {
         console.error(`Unable to bind to target! Debug Required.`);
     }
     
-    // edit step btn
+    // edit step btn - update UI
     const editStepBtn = document.getElementById("editStep");
     editStepBtn.addEventListener("click", () => {
-        //editStep();
+        displayEditStep();
+    });
+
+    // edit step btn - initiates update to db
+    const saveEditBtn = document.getElementById("saveEditBtn");
+    saveEditBtn.addEventListener("click", () => {
+        editStep();
     });
 
     // find step btn - updates UI to prepare for db retrieval
@@ -89,14 +95,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // cancel update step btn
     const cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
     cancelUpdateBtn.addEventListener("click", () => {
-        document.getElementById("createBtn").style.display = "inline";
-        document.getElementById("addStep").style.display = "none";
-        document.getElementById("editStep").style.display = "none";
-        document.getElementById("saveStepBtn").style.display = "none";
-        document.getElementById("getStepBtn").style.display = "none";
-        document.getElementById("findStepBtn").style.display = "none";
-        document.getElementById("cancelUpdateBtn").style.display = "none";
-
         homepage();
     });
 
