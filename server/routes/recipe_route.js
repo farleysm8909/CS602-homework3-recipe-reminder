@@ -1,6 +1,6 @@
 import express from "express";
 import { isProduction } from "../utils/common.js";
-import { Recipe } from "../models/Recipe.js";
+import { Recipe } from "../model/Recipe.js";
 
 const router = express.Router();
 
@@ -139,6 +139,8 @@ router.delete("/:_id/step/:sId", async (req, res) => {
         res.status(404).json({error: "Recipe doesn't exist!"});
     }
 });
+
+
 
 /* ************************* UPDATE ************************* */
 

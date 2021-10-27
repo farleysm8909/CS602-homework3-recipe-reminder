@@ -20,7 +20,9 @@ function displayEditStep() {
     document.getElementById("editStep").style.display = "none";
     document.getElementById("saveEditBtn").style.display = "inline";   
     document.getElementById("findStepBtn").style.display = "none";
+    document.getElementById("deleteStepBtn").style.display = "none";
 }
+
 
 async function editStep() {
     const url = `http://127.0.0.1:3000/recipe`;

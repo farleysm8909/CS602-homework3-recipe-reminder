@@ -11,7 +11,7 @@ async function retrieveRecipe(recIndex) {
 
     const url2 = `http://127.0.0.1:3000/recipe/${recipeId}`;
 
-    const fetchResponse2 = await fetch(url2);            // fetch single recipe
+    const fetchResponse2 = await fetch(url2);          
     const jsonResponse2 = await fetchResponse2.json(); 
 
     const name = jsonResponse2.name;
@@ -36,7 +36,6 @@ async function retrieveRecipe(recIndex) {
     document.getElementById("findStepBtn").style.display = "inline";
     document.getElementById("deleteStepBtn").style.display = "inline";
     document.getElementById("cancelUpdateBtn").style.display = "inline";
-
 }
 
 
@@ -69,7 +68,7 @@ async function retrieveStep() {
     const fetchResponse = await fetch(url);
     const jsonResponse = await fetchResponse.json();
 
-    // figure out which recipe is being added to
+    // locate which recipe is being added to
     const recipe_name = document.getElementById("retrieved-recipe").textContent;
     let recIndex;
 
@@ -90,6 +89,10 @@ async function retrieveStep() {
 
     document.getElementById("homepage-response").innerHTML = 
     `<div class="recipe-cards"><p>Step Number ${sId}: ${step}</p></div>`;
+
+    let step_num_field = document.getElementById("step-num-entry-field");
+    step_num_field.style.display = "none";
+    document.getElementById("getStepBtn").style.display = "none";
 }
 
 
