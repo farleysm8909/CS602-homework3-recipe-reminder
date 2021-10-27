@@ -8,13 +8,16 @@ async function homepage() {
     const jsonResponse = await fetchResponse.json();  // converts json data to javascript objects
 
     document.getElementById("homepage-response").innerHTML = "";
+    document.getElementById("step-entry-fields").style.display = "none";
 
     jsonResponse.forEach(recipe => {
         let name = `<h4 class="recNames">${recipe.name}</h4>`;
         let desc = `<p>${recipe.description}</p>`;
-        let recipe_steps = recipe.steps;
+        let recipe_string = recipe.steps;
+        // break up string into individual steps
+        let steps_array = recipe_string[0].split("   ");
         let steps = `<ol>`;
-        recipe_steps.forEach((step) => {
+        steps_array.forEach(step => {
             steps += `<li>${step}</li>`;
         });
         steps += `</ol>`;

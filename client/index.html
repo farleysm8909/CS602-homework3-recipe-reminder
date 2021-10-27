@@ -16,7 +16,10 @@
         <button id="createBtn" type="button" class="btn btn-primary">Create Recipe</button>
         <div id="homepage-response"></div>
         <div class="updateBtns">
-            <button id="updateStep" type="button" class="btn btn-secondary">Update a Step</button>
+            <div id="step-entry-fields"></div>
+            <button id="addStep" type="button" class="btn btn-primary">Add Step</button>
+            <button id="editStep" type="button" class="btn btn-secondary">Edit Step</button>
+            <button id="saveStepBtn" type="button" class="btn btn-success">Save Step</button>
             <button id="cancelUpdateBtn" type="button" class="btn btn-danger">Cancel</button>
         </div>
     </div>
@@ -37,9 +40,10 @@
     
             <div class="r-steps">
                 <div class="input-group mb-3">
-                    <span class="input-group-text">First Step Description</span>
-                    <input type="text" class="form-control" id="steps" placeholder="e.g., Preheat the oven...">
+                    <span class="input-group-text">Step #1 Description</span>
+                    <input type="text" class="form-control step-values" id="steps" placeholder="e.g., Preheat the oven...">
                 </div> 
+                <div id="more-steps"></div>
             </div>
         </section>
         <button id="stepBtn" type="button" class="btn btn-primary">Add Another Step</button>

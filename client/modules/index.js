@@ -1,5 +1,6 @@
-import { saveRecipe } from "./create.js";
+import { saveRecipe, addStep, addStepToExistingRecipe, saveStep } from "./create.js";
 import { homepage } from "./homepage.js";
+// import { editStep } from "./update.js";
 
 window.addEventListener('DOMContentLoaded', () => {
     const create_page = document.getElementById("create-recipe");
@@ -38,11 +39,36 @@ window.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error(`Unable to bind to target! Debug Required.`);
     } 
+
+
+    // create new step btn (during recipe creation only)
+    const addStepBtn = document.getElementById("stepBtn");
+    let nextStepNum = 2;
+    addStepBtn.addEventListener("click", () => {
+        addStep(nextStepNum);
+        nextStepNum++;
+    });
+
+    // create new step btn (while examining one recipe)
+    const addStep = document.getElementById("addStep");
+    addStep.addEventListener("click", () => {
+        addStepToExistingRecipe();
+    });
+
+    // save new step btn
+    const savestepbtn = document.querySelector("#saveStepBtn");
+    if ( savestepbtn ) {
+        savestepbtn.addEventListener("click", () => {
+            saveStep();
+        });
+    } else {
+        console.error(`Unable to bind to target! Debug Required.`);
+    }
     
-    // update step btn
-    const updateBtn = document.getElementById("updateStep");
-    updateBtn.addEventListener("click", () => {
-        // update step
+    // edit step btn
+    const editStepBtn = document.getElementById("editStep");
+    editStepBtn.addEventListener("click", () => {
+        //editStep();
     });
 
 
@@ -50,9 +76,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
     cancelUpdateBtn.addEventListener("click", () => {
         document.getElementById("createBtn").style.display = "inline";
-        document.getElementById("updateStep").style.display = "none";
+        document.getElementById("addStep").style.display = "none";
+        document.getElementById("editStep").style.display = "none";
+        document.getElementById("saveStepBtn").style.display = "none";
         document.getElementById("cancelUpdateBtn").style.display = "none";
-        
+
         homepage();
     });
 

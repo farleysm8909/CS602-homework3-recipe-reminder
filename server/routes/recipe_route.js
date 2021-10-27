@@ -70,6 +70,26 @@ router.post("/", async (req, res) => {
     }
 });
 
+// create a new recipe step NOT FINISHED
+router.post("/:_id/step", async (req, res) => { 
+    // validate request
+    if (!req.body.steps) {
+        return res.status(400).send({error: "Step field cannot be empty"});
+    }
+
+    try {
+        let recipe = await Recipe.findById(req.params._id);
+        recipe.steps = req.body.steps;
+        const savedRecipe = await recipe.save();
+        res.status(200).json(JSON.stringify(savedRecipe)); 
+    } catch(err) {
+        if (isProduction()) {
+            console.error(err);
+        }
+        res.status(500).json({error: "Recipe not saved."}); 
+    }
+});
+
 
 /* ************************* DELETE ************************* */
 

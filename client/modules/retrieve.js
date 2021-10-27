@@ -14,21 +14,23 @@ async function retrieveRecipe(recIndex) {
     const fetchResponse2 = await fetch(url2);            // fetch single recipe
     const jsonResponse2 = await fetchResponse2.json(); 
 
-    const _id = jsonResponse2._id;
     const name = jsonResponse2.name;
     const desc = jsonResponse2.description;
-    const recipe_steps = jsonResponse2.steps;
+    const recipe_string = jsonResponse2.steps;
+    // break up string into individual steps
+    let steps_array = recipe_string[0].split("   ");
     let steps = `<ol>`;
-    recipe_steps.forEach((step) => {
+    steps_array.forEach(step => {
         steps += `<li>${step}</li>`;
     });
     steps += `</ol>`;
     
     document.getElementById("homepage-response").innerHTML = 
-    `<div class="recipe-cards"><h4>${name}</h4>${desc}${steps}</div>`;
+    `<div class="recipe-cards"><h4 id="retrieved-recipe">${name}</h4>${desc}${steps}</div>`;
 
     document.getElementById("createBtn").style.display = "none";
-    document.getElementById("updateStep").style.display = "inline";
+    document.getElementById("addStep").style.display = "inline";
+    document.getElementById("editStep").style.display = "inline";
     document.getElementById("cancelUpdateBtn").style.display = "inline";
 
 }
