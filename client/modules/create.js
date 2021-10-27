@@ -44,14 +44,6 @@ async function saveRecipe() {
 }
 
 
-// function addStep(nextStepNum) {
-//     document.getElementById("more-steps").innerHTML += 
-//     `<div class="input-group mb-3">
-//         <span class="input-group-text">Step #${nextStepNum} Description</span>
-//         <input type="text" class="form-control step-values" id="steps" placeholder="e.g., Next...">
-//     </div>`;
-// }
-
 function addStep(nextStepNum) {
     document.getElementById("more-steps").innerHTML += 
     `<div class="input-group mb-3">

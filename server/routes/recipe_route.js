@@ -103,14 +103,42 @@ router.delete("/:_id", async (req, res) => {
     try {
         const deletedrecipe = await Recipe.deleteOne({_id: req.params._id}); // https://rahmanfadhil.com/express-rest-api/
 
-        res.status(204).json({message: "Hooray!"});
+        res.status(204).json({message: "Recipe deleted!"});
     } catch(err) {
         res.status(404).json({error: "Recipe doesn't exist!"});
     }
 });
 
-export {router as recipeRoutes};
 
+// delete step with a specific id
+router.delete("/:_id/step/:sId", async (req, res) => { 
+    // validate request
+    if (!req.body.sId) {
+        return res.status(400).send({error: "Step field cannot be empty"});
+    }
+
+    try {
+        let recipe = await Recipe.findById(req.params._id);
+        const sId = Number(req.params.sId);
+        let steps_string = recipe.steps[0];
+        // break up string into individual steps
+        const steps_array = steps_string.split("   ");
+        steps_array.splice(sId-1, 1);
+
+        steps_string = "";
+        for (let i=0; i<steps_array.length-1; i++) {
+            steps_string += steps_array[i] + "   ";
+        }
+        steps_string += steps_array[steps_array.length-1];
+
+        recipe.steps = [steps_string];
+        const savedRecipe = await recipe.save();
+        res.status(200).json(JSON.stringify(savedRecipe));
+
+    } catch(err) {
+        res.status(404).json({error: "Recipe doesn't exist!"});
+    }
+});
 
 /* ************************* UPDATE ************************* */
 
@@ -142,3 +170,7 @@ router.put("/:_id/step/:sId", async (req, res) => {
         res.status(404).json({error: "Unable to update step"});
     }
 });
+
+
+
+export {router as recipeRoutes};

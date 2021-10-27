@@ -2,6 +2,7 @@ import { saveRecipe, addStepToExistingRecipe, saveStep, addStep } from "./create
 import { homepage } from "./homepage.js";
 import { displayStepNumField, retrieveStep } from "./retrieve.js";
 import { editStep, displayEditStep } from "./update.js";
+import { deleteStep } from "./delete.js";
 
 window.addEventListener('DOMContentLoaded', () => {
     const create_page = document.getElementById("create-recipe");
@@ -81,7 +82,7 @@ window.addEventListener('DOMContentLoaded', () => {
     // find step btn - updates UI to prepare for db retrieval
     const findStepBtn = document.getElementById("findStepBtn");
     findStepBtn.addEventListener("click", () => {
-        displayStepNumField();
+        displayStepNumField("Retrieve");
     });
 
 
@@ -92,10 +93,26 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    // delete step btn - updates UI
+    const delStepBtn = document.getElementById("deleteStepBtn");
+    delStepBtn.addEventListener("click", () => {
+        displayStepNumField("Delete");
+    });
+
+    // delete step btn - initiates delete to db
+    const saveDelBtn = document.getElementById("saveDeleteBtn");
+    saveDelBtn.addEventListener("click", () => {
+        deleteStep();
+    });
+
+
     // cancel update step btn
     const cancelUpdateBtn = document.getElementById("cancelUpdateBtn");
     cancelUpdateBtn.addEventListener("click", () => {
         homepage();
     });
+
+
+
 
 });

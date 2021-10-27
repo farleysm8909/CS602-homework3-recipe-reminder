@@ -30,27 +30,36 @@ async function retrieveRecipe(recIndex) {
 
     document.getElementById("createBtn").style.display = "none";
     document.getElementById("saveEditBtn").style.display = "none";
+    document.getElementById("saveDeleteBtn").style.display = "none";
     document.getElementById("addStep").style.display = "inline";
     document.getElementById("editStep").style.display = "inline";
     document.getElementById("findStepBtn").style.display = "inline";
+    document.getElementById("deleteStepBtn").style.display = "inline";
     document.getElementById("cancelUpdateBtn").style.display = "inline";
 
 }
 
 
 
-function displayStepNumField() {
+function displayStepNumField(action) {
     let step_num_field = document.getElementById("step-num-entry-field");
     step_num_field.innerHTML = 
     `<div class="input-group mb-3">
-        <span class="input-group-text">Step Number to Retrieve</span>
+        <span class="input-group-text">Step Number to ${action}</span>
         <input type="text" class="form-control step-values" id="stepNum" placeholder="e.g., 2">
     </div>`;
     step_num_field.style.display = "block";
-    document.getElementById("getStepBtn").style.display = "inline";
+
+    if (action === "Retrieve") {
+        document.getElementById("getStepBtn").style.display = "inline";
+    } else if (action === "Delete") {
+        document.getElementById("saveDeleteBtn").style.display = "inline";
+    }
+
     document.getElementById("addStep").style.display = "none";
     document.getElementById("editStep").style.display = "none";
-    document.getElementById("findStepBtn").style.display = "none";
+    document.getElementById("findStepBtn").style.display = "none"; 
+    document.getElementById("deleteStepBtn").style.display = "none";
 }
 
 
@@ -81,8 +90,6 @@ async function retrieveStep() {
 
     document.getElementById("homepage-response").innerHTML = 
     `<div class="recipe-cards"><p>Step Number ${sId}: ${step}</p></div>`;
-
-    //document.getElementById("step-num-entry-field").style.display = "none";
 }
 
 

@@ -18,6 +18,8 @@ async function homepage() {
     document.getElementById("findStepBtn").style.display = "none";
     document.getElementById("cancelUpdateBtn").style.display = "none";
     document.getElementById("saveEditBtn").style.display = "none";
+    document.getElementById("deleteStepBtn").style.display = "none";
+    document.getElementById("saveDeleteBtn").style.display = "none";
 
     jsonResponse.forEach(recipe => {
         let name = `<h4 class="recNames">${recipe.name}</h4>`;
